@@ -7,6 +7,16 @@ from sklearn.compose import ColumnTransformer
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 
+import platform
+
+if platform.system() == 'Windows':
+    plt.rcParams['font.family'] = 'Malgun Gothic'
+elif platform.system() == 'Linux':
+    plt.rcParams['font.family'] = 'NanumGothic'
+
+plt.rcParams['axes.unicode_minus'] = False
+
+
 def main() :
     st.title('K-Means Clustering App')
 
@@ -88,7 +98,7 @@ def main() :
         fig1 = plt.figure()
         plt.plot( range(1, max_k+1) ,  wcss )
         plt.title('The Elbow Method')
-        plt.xlabel('쿨러스터 갯수')
+        plt.xlabel('클러스터 갯수')
         plt.ylabel('WCSS 값')
         st.pyplot( fig1 ) 
         
