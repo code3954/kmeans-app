@@ -6,6 +6,7 @@ from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
+import platform
 
 def set_font():
     font_path = '/usr/share/fonts/truetype/nanum/NanumGothic.ttf'  # Linux에서 사용할 경우
