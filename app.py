@@ -23,9 +23,9 @@ def main():
 
     # 사이드바에 목차 추가
     st.sidebar.title('목차')
-    page = st.sidebar.radio("섹션 선택", ["소개", "CSV 파일 업로드", "K-Means 클러스터링", "결과"])
+    page = st.sidebar.radio("섹션 선택", ["앱 소개", "CSV 파일 업로드", "K-Means 클러스터링", "결과"])
 
-    if page == "소개":
+    if page == "앱 소개":
         show_intro()
     elif page == "CSV 파일 업로드":
         upload_csv()
@@ -38,6 +38,7 @@ def show_intro():
     st.title('K-Means Clustering App')
     st.write("""
         이 앱은 K-Means 클러스터링을 사용하여 데이터를 군집화하는 앱입니다.
+             
         사용자는 CSV 파일을 업로드하고, 적절한 컬럼을 선택하여 최적의 군집 수를 찾고 클러스터링을 수행할 수 있습니다.
     """)
 
@@ -46,10 +47,10 @@ def upload_csv():
 
     # 사이드바에서 파일 업로드
     file = st.sidebar.file_uploader('CSV 파일 업로드', type=['csv'])
+    st.subheader('CSV 파일을 업로드 합니다.')
 
     if file is not None:
-        # 파일을 세션 상태에 저장
-        st.session_state['file'] = file
+                
         df = pd.read_csv(file)
         st.subheader("데이터 미리보기")
         st.dataframe(df.head())
@@ -63,7 +64,6 @@ def upload_csv():
         selected_columns = st.multiselect('컬럼 선택', df.columns)
 
         if len(selected_columns) == 0:
-            st.warning("하나 이상의 컬럼을 선택해주세요.")
             return
 
         df_new = pd.DataFrame()
