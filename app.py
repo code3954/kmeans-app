@@ -10,12 +10,11 @@ import matplotlib.pyplot as plt
 import platform
 
 if platform.system() == 'Windows':
-    plt.rcParams['font.family'] = 'NanumGothic'
+    plt.rcParams['font.family'] = 'Malgun Gothic'
 elif platform.system() == 'Linux':
     plt.rcParams['font.family'] = 'NanumGothic'
 
 plt.rcParams['axes.unicode_minus'] = False
-
 
 import os
 import matplotlib.font_manager as fm
