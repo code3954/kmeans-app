@@ -21,6 +21,11 @@ def fontRegistered():
     fm._load_fontmanager(try_read_cache=False)
 
 
+    with open(file, 'rb') as f:
+        result = chardet.detect(f.read())
+    encoding = result['encoding']    
+
+
 def main():
 
     fontRegistered()
