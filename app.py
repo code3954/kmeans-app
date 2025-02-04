@@ -43,7 +43,8 @@ def main():
 
         # 2. 데이터 불러오기 (인코딩을 감지한 후 읽어오기)
         try:
-            df = pd.read_csv(file, encoding=encoding, sep=' ', engine='python')
+            # 쉼표(,) 구분자와 쌍따옴표 처리 추가
+            df = pd.read_csv(file, encoding=encoding, sep=',', quotechar='"')
             st.dataframe(df.head())
         except Exception as e:
             st.error(f"파일 읽기 오류: {str(e)}")
