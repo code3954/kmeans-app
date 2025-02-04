@@ -8,7 +8,6 @@ import matplotlib.pyplot as plt
 import chardet
 import os
 import matplotlib.font_manager as fm
-from io import BytesIO  # 필요한 라이브러리 추가
 
 # fontRegistered 함수 수정
 @st.cache_data
@@ -38,8 +37,16 @@ def main():
         # 파일 포인터를 처음으로 돌려놓기 위해서 다시 `seek(0)`을 호출
         file.seek(0)
 
-        # 2. 데이터 불러오기
-        df = pd.read_csv(file, encoding=encoding)
+        # 2. 데이터 불러오기 (인코딩과 구분자를 명시적으로 지정)
+        try:
+            df = pd.read_csv(file, encoding=encoding, sep=',')  # 구분자 ,(쉼표)로 지정
+        except UnicodeDecodeError:
+            st.error(f"파일 인코딩 '{encoding}'으로 읽는 데 문제가 발생했습니다. 다른 인코딩을 시도해주세요.")
+            return
+        except pd.errors.ParserError:
+            st.error("파일 구분자 또는 형식에 문제가 있습니다. 다른 구분자나 형식을 시도해 보세요.")
+            return
+        
         st.dataframe(df.head())
 
         st.info('Nan 이 있으면 행을 삭제합니다.')
