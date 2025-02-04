@@ -31,7 +31,7 @@ def main():
 
     if file is not None:
         # 2. 데이터 불러오기
-        df = pd.read_csv(file)
+        df = pd.read_csv(file, encoding='utf-8')
         st.dataframe( df.head() )
 
         st.info('Nan 이 있으면 행을 삭제합니다.')
