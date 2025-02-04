@@ -7,25 +7,14 @@ from sklearn.compose import ColumnTransformer
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 
-import platform
+def set_font():
+    font_path = '/usr/share/fonts/truetype/nanum/NanumGothic.ttf'  # Linux에서 사용할 경우
+    if platform.system() == 'Windows':
+        font_path = 'C:/Windows/Fonts/malgun.ttf'  # Windows에서 사용할 경우
 
-if platform.system() == 'Windows':
-    plt.rcParams['font.family'] = 'Malgun Gothic'
-elif platform.system() == 'Linux':
-    plt.rcParams['font.family'] = 'NanumGothic'
-
-plt.rcParams['axes.unicode_minus'] = False
-
-import os
-import matplotlib.font_manager as fm
-
-@st.cache_data
-def fontRegistered():
-    font_dirs = [os.getcwd() + '/custom_fonts']
-    font_files = fm.findSystemFonts(fontpaths=font_dirs)
-    for font_file in font_files:
-        fm.fontManager.addfont(font_file)
-    fm._load_fontmanager(try_read_cache=False)
+    font_prop = fm.FontProperties(fname=font_path)
+    plt.rcParams['font.family'] = font_prop.get_name()
+    plt.rcParams['axes.unicode_minus'] = False  # 마이너스 기호 표시
 
 
 
@@ -33,8 +22,7 @@ def fontRegistered():
 
 def main() :
 
-    fontRegistered()
-    plt.rc('font', family='NanumGothic')
+    set_font()
 
     st.title('K-Means Clustering App')
 
