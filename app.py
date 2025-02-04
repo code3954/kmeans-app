@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 import chardet
 import os
 import matplotlib.font_manager as fm
+from io import BytesIO  # 필요한 라이브러리 추가
 
 # fontRegistered 함수 수정
 @st.cache_data
@@ -18,9 +19,8 @@ def fontRegistered(file):
         fm.fontManager.addfont(font_file)
     fm._load_fontmanager(try_read_cache=False)
 
-    # 파일 인코딩 확인
-    with open(file, 'rb') as f:
-        result = chardet.detect(f.read())
+    # BytesIO 객체에서 인코딩 확인
+    result = chardet.detect(file.read())  # file.read()로 파일을 읽음
     encoding = result['encoding']
     return encoding
 
@@ -34,6 +34,9 @@ def main():
         # 인코딩 확인 (fontRegistered 함수에 파일 전달)
         encoding = fontRegistered(file)
         st.info(f'파일 인코딩: {encoding}')
+
+        # 파일 포인터를 처음으로 돌려놓기 위해서 다시 `seek(0)`을 호출
+        file.seek(0)
 
         # 2. 데이터 불러오기
         df = pd.read_csv(file, encoding=encoding)
