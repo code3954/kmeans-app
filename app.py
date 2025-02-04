@@ -88,8 +88,8 @@ def main() :
         fig1 = plt.figure()
         plt.plot( range(1, max_k+1) ,  wcss )
         plt.title('The Elbow Method')
-        plt.xlabel('# of Clussters')
-        plt.ylabel('WCSS')
+        plt.xlabel('쿨러스터 갯수')
+        plt.ylabel('WCSS 값')
         st.pyplot( fig1 ) 
         
     
