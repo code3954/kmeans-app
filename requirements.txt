@@ -2,5 +2,4 @@ streamlit
 pandas
 scikit-learn
 matplotlib
-tensorflow==2.15
-import chardet
+chardet==5.2.0
