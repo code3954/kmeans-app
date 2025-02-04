@@ -6,6 +6,8 @@ from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
+import chardet
+
 
 import os
 import matplotlib.font_manager as fm
@@ -31,7 +33,7 @@ def main():
 
     if file is not None:
         # 2. 데이터 불러오기
-        df = pd.read_csv(file, encoding='ISO-8859-1')
+        df = pd.read_csv(file, encoding='utf-8')
         st.dataframe( df.head() )
 
         st.info('Nan 이 있으면 행을 삭제합니다.')
